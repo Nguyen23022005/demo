@@ -1,0 +1,11 @@
+{
+    "name": "nguyen/mvc",
+    "autoload": {
+        "psr-4": {
+            "Nguyen\\Mvc\\": "src/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
