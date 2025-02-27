@@ -35,6 +35,6 @@
     <div class="container">
         <h1>Cảm ơn bạn đã mua hàng!</h1>
         <p>Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ liên hệ với bạn sớm nhất có thể.</p>
-        <a href="index.html" class="button">Quay lại trang chủ</a>
+        <a href="/" class="button">Quay lại trang chủ</a>
     </div>
 </body>

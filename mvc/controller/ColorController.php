@@ -16,12 +16,13 @@ class ColorController
         $colors = $this->colorModel->getAll();
         renderView("view/color/list.php", compact('colors'), "Colors List");
     }
-
-    public function show($id)
-    {
+    public function show($id){
         $color = $this->colorModel->getById($id);
-        renderView("view/color/detail.php", compact('color'), "Color Detail");
-    }
+        renderView("view/color/show.php", compact('color'), "Color");
+        }
+    
+
+  
 
     public function create()
     {

@@ -10,8 +10,8 @@ $colors = [];
 $sizes = [];
 $variantMap = [];
 
-if (!empty($productsVariants)) {
-    foreach ($productsVariants as $variant) {
+if (!empty($product_variants)) {
+    foreach ($product_variants as $variant) {
         if (!empty($variant['colorName']) && !in_array($variant['colorName'], $colors)) {
             // thêm màu vào mảng colors
             $colors[] = $variant['colorName'];
@@ -22,10 +22,6 @@ if (!empty($productsVariants)) {
         }
         // Map variants for quick lookup
         $variantMap[$variant['colorName']][$variant['sizeName']] = $variant;
-        // echo "<pre>";
-        // var_dump($variantMap);
-        // echo "</pre>";
-
     }
 }
 ?>
@@ -35,8 +31,8 @@ if (!empty($productsVariants)) {
 <div class="row">
     <div class="col-6">
         <!-- Display main product image -->
-        <img id="productImage" empty="<?= !empty($product['image']) ? htmlspecialchars($product['image']) : 'placeholder.jpg' ?>"
-            class="img-fluid"
+        <img id="productImage" src="<?= !empty($product['image']) ? htmlspecialchars($product['image']) : 'placeholder.jpg' ?>" 
+            class="img-fluid" 
             alt="<?= !empty($product['name']) ? htmlspecialchars($product['name']) : 'No Name' ?>">
     </div>
 
@@ -63,20 +59,17 @@ if (!empty($productsVariants)) {
                 <?php endforeach; ?>
             </select>
 
-            <!-- Hidden SKU Field -->
             <input type="hidden" id="selectedSku" name="sku" value="">
             <input type="hidden" id="selectedPrice" name="price" value="">
-            <!-- Quantity Input -->
+            
             <label for="quantityInput" class="mt-3"><strong>Quantity:</strong></label>
             <input type="number" id="quantityInput" name="quantity" class="form-control" min="1" value="1" required disabled>
-
-            <!-- Add to Cart Button -->
+            
             <button type="submit" id="addToCartBtn" class="btn btn-primary mt-3" disabled>Add to Cart</button>
         </form>
     </div>
 </div>
 
-<!-- Product Details -->
 <p><strong>Description:</strong> <?= nl2br(htmlspecialchars($product['description'])) ?></p>
 <p><strong>Price:</strong> $<span id="productPrice"><?= number_format($product['price'], 2) ?></span></p>
 <p><strong>SKU:</strong> <span id="productSku">N/A</span></p>
@@ -84,10 +77,28 @@ if (!empty($productsVariants)) {
 
 <a href="/cart.php" class="btn btn-secondary mt-3">Go to Cart</a>
 
-<!-- show sản phẩm đúng với attribute -->
-<script>
-    const variantMap = <?= json_encode($variantMap, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>;
+<!-- Related Products Section -->
+<h2 class="mt-5">Related Products</h2>
+<div class="row">
+ 
+        <?php foreach ($products as $related) : ?>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="<?= !empty($related['image']) ? htmlspecialchars($related['image']) : 'uploads/placeholder.jpg' ?>" class="card-img-top" alt="<?= htmlspecialchars($related['name']) ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= htmlspecialchars($related['name']) ?></h5>
+                        <p class="card-text">$<?= number_format($related['price'], 2) ?></p>
+                        <a href="/product.php?id=<?= $related['id'] ?>" class="btn btn-primary">View Product</a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+ 
+</div>
 
+<script>
+  const variantMap = <?= json_encode($variantMap, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>;
+    
     const colorSelect = document.getElementById('colorSelect');
     const sizeSelect = document.getElementById('sizeSelect');
     const quantityInput = document.getElementById('quantityInput');
@@ -109,7 +120,6 @@ if (!empty($productsVariants)) {
         productQuantity.textContent = "N/A";
 
         const selectedColor = this.value;
-        console.log("variant Map", variantMap);
         if (variantMap[selectedColor]) {
             sizeSelect.disabled = false;
             Object.keys(variantMap[selectedColor]).forEach(size => {
@@ -127,10 +137,10 @@ if (!empty($productsVariants)) {
 
         const selectedColor = colorSelect.value;
         const selectedSize = this.value;
-
+        
         if (variantMap[selectedColor] && variantMap[selectedColor][selectedSize]) {
             const variant = variantMap[selectedColor][selectedSize];
-            updateProductImage(variant.image); // Gọi hàm để cập nhật ảnh
+            productImage.src = variant.image ? variant.image : 'placeholder.jpg';
             productPrice.textContent = `${parseFloat(variant.price).toFixed(2)}`;
             productSku.textContent = variant.sku;
             selectedSku.value = variant.sku;
@@ -140,22 +150,4 @@ if (!empty($productsVariants)) {
             selectedPrice.value = variant.price;
         }
     });
-
-
-    quantityInput.addEventListener('change', function() {
-        const quantity = parseInt(this.value);
-        const availableQuantity = parseInt(productQuantity.textContent);
-        if (quantity > availableQuantity) {
-            this.value = availableQuantity;
-            alert(`Only ${availableQuantity} available in stock.`);
-        }
-    });
-
-    function updateProductImage(imageUrl) {
-        if (imageUrl) {
-            productImage.src = imageUrl;
-        } else {
-            productImage.src = 'placeholder.jpg';
-        }
-    }
 </script>

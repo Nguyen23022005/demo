@@ -9,18 +9,18 @@ class OrderModel {
         $database = new Database();
         $this->conn = $database->getConnection();
     }
-
+    //
     public function getOrders() {
         $query = "SELECT * FROM orders";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function getOrderByUserId($user_id){
+    //đơn hàng của 1 người
+    public function getOrderByUserId($user_id) {
         $query = "SELECT * FROM orders WHERE user_id = :user_id";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -57,7 +57,30 @@ class OrderModel {
             return true;
 
     }
+    // Tính tổng doanh thu từ các đơn hàng đã hoàn thành
+    public function getTotalRevenueAllOrders() {
+        try {
+            $query = "SELECT SUM(total) as revenue FROM orders WHERE status = 'hoàn thành'"; // Loại bỏ điều kiện WHERE
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return isset($result['revenue']) ? floatval($result['revenue']) : 0;
+        } catch (PDOException $e) {
+            error_log("Lỗi truy vấn doanh thu: " . $e->getMessage());
+            return 0;
+        }
+    }
+    public function updateOrderStatus($order_id, $new_status) {
+        $query = "UPDATE orders SET status = :status WHERE id = :order_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':status', $new_status);
+        $stmt->bindParam(':order_id', $order_id);
+        return $stmt->execute();
+    }
+    
+
 }
+
 /**
  * get orders
  * get order by userId

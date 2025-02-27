@@ -47,6 +47,13 @@ class UserModel {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function getUserById1($id) {
+        $query = "SELECT * FROM userss WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function createUser($name, $email, $password) {
         $query = "INSERT INTO userss (name, email, password) VALUES (:name, :email, :password)";

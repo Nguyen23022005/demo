@@ -45,6 +45,19 @@ class CartModel {
         }
         return false;
     }
+    public function clearCart($user_id, $cart_session)
+    {
+        $condition = !empty($user_id) ? "user_id = :user_id" : "cart_session = :cart_session";
+
+        $query = "DELETE FROM carts WHERE $condition";
+        $stmt = $this->conn->prepare($query);
+        if (!empty($user_id)) {
+            $stmt->bindParam(':user_id', $user_id);
+        } else {
+            $stmt->bindParam(':cart_session', $cart_session);
+        }
+        return $stmt->execute();
+    }
     
 
     public function updateQuantity($id_Cart, $quantityy) {

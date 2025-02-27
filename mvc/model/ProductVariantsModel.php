@@ -19,14 +19,18 @@ class ProductVariantModel {
 
     public function checkExistSku($sku) {
         $query = "SELECT * FROM product_variantss WHERE sku = :sku";
-        
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':sku', $sku);
         $stmt->execute();
         return ($stmt->fetchColumn() > 0);
     }
     
-    
+    public function getVariantByProductId1() {
+        $query = "SELECT * FROM product_variantss";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function getVariantByProductId($productId) {
         $query = "SELECT *, c.name as colorName, s.name as sizeName

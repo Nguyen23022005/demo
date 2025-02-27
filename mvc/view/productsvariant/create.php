@@ -1,6 +1,3 @@
-
-
-
 <h1>Create Product Variants</h1>
 <form method="POST" enctype="multipart/form-data">
     <div class="mb-3">
@@ -61,9 +58,3 @@
 
     <button type="submit" class="btn btn-success">Create</button>
 </form>
-
-
-
-
-
-

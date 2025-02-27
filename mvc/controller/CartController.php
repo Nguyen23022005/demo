@@ -3,6 +3,7 @@ require_once "model/CategoryModel.php";
 require_once "view/helpers.php";
 require_once "model/CartModel.php";
 require_once 'model/OrderModel.php';
+require_once 'Utils.php';
 
 // enum StatusOrder: string
 // {
@@ -76,6 +77,13 @@ class CartController
                  * gui email
                  * hien thi trang thanh toan thanh con
                  */
+                sentemail($email, 'DON HANG CUA BAN DA DUOC TAO THANH CONG', 'chuc mung ban');
+
+                $this->cartModel->clearCart($user_id, $session_id);
+                $_SESSION['success'] = "Đơn hàng đã được tạo thành công!";
+                header("Location: /view/cart/thanksyou.php");
+                exit;
+
             } else if ($payment == 'vnpay') {
             }
         } else {
@@ -86,7 +94,7 @@ class CartController
             renderView("view/cart/checkout.php", compact('carts'), "carts List");
         }
     }
-
+   
 
 
     // public function show($id) {
@@ -150,6 +158,8 @@ class CartController
         header("Location: /carts");
         exit;
     }
+    
+    
 }
 
     

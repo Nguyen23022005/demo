@@ -1,13 +1,14 @@
 <?php
 
 namespace MailService;
-
+require 'view/cart/vendor/autoload.php';
+require 'view/cart/vendor/phpmailer/phpmailer/src/PHPMailer.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 // Tải autoloader của Composer
-require 'vendor/autoload.php';
+
 // require 'PHPMailer/src/Exception.php';
 // require 'PHPMailer/src/PHPMailer.php';
 // require 'PHPMailer/src/SMTP.php';

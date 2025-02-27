@@ -35,11 +35,8 @@
         <?php endif; ?>
     </div>
     <div class="mb-3">
-        <label for="image" class="form-label">Product Image</label>
-        <input type="file" class="form-control <?= isset($errors['image']) ? 'is-invalid' : '' ?>" id="productImage" name="image">
-        <?php if (isset($errors['image'])): ?>
-            <div class="invalid-feedback"><?= htmlspecialchars($errors['image']) ?></div>
-        <?php endif; ?>
+        <label for="image" class="form-label">Image</label>
+        <input type="file" class="form-control" id="image" name="image" required>
     </div>
 
     <button type="submit" class="btn btn-success">Create</button>

@@ -23,7 +23,12 @@ class ProductVariantController {
         //compact: gom bien dien thanh array
         renderView("view/product_list.php", compact('products'), "Product List");
     }
-    
+    public function home() {
+        $product_variants = $this->productVariantModel->getVariantByProductId1();
+        
+        //compact: gom bien dien thanh array
+        renderView("view/home.php", compact('product_variants'), "Product List");
+    }
 
     public function show($id) {
         $product = $this->productModel->getProductById($id);
@@ -83,7 +88,7 @@ class ProductVariantController {
             $this->productVariantModel->createVariants($product_id, $colorId, $sizeId, $image, $quantity, $price, $sku);
             $_SESSION['message'] = "<p class='alert alert-primary'>Product variant created successfully.</p>";
     
-            header("Location: /products");
+            header("Location: /");
             exit;
         } else {
             $products = $this->productModel->getAllProducts();

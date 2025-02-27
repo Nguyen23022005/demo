@@ -3,20 +3,35 @@ require_once "model/UserModel.php";
 require_once "view/helpers.php";
 
 class UserController {
-    private $usertModel;
+    private $userModel;
 
     public function __construct() {
-        $this->usertModel = new UserModel();
+        $this->userModel = new UserModel();
     }
 
     public function index() {
-        $user = $this->usertModel->getAllUser();
+        $user = $this->userModel->getAllUser();
         renderView("view/user/list.php", compact('user'), "User List");
     }
 
     public function show($id) {
-        $user = $this->usertModel->getUserById($id);
+        $user = $this->userModel->getUserById($id);
         renderView("view/user/detail.php", compact('user'), "User Detail");
+    }
+    public function profile($id) {
+     
+        // Kiểm tra xem người dùng đã đăng nhập hay chưa
+        if (!isset($_SESSION['id'])) {
+            die("Bạn cần đăng nhập để xem trang này."); // Hoặc có thể redirect đến trang login
+            
+        }
+        $id = $_SESSION['id']; // Lấy ID của người dùng đã đăng nhập
+        $profile = $this->userModel->getUserById1($id);
+        if (!$id) {
+            die("Không tìm thấy người dùng.");
+        }
+    
+        renderView("view/auth/profile.php", compact('profile'), "User Profile");
     }
 
     public function create() {
@@ -39,7 +54,7 @@ class UserController {
             
 
             if (empty($errors)) {
-                $this->usertModel->createUser($name, $email, $password);
+                $this->userModel->createUser($name, $email, $password);
                 $_SESSION['success_message'] = "product created successfully!";
                 header("Location: /users");
                 exit;
@@ -70,22 +85,22 @@ class UserController {
             }
 
             if (empty($errors)) {
-                $this->usertModel->createUser($name, $email, $password);
+                $this->userModel->createUser($name, $email, $password);
                 $_SESSION['success_message'] = "user edit successfully!";
                 header("Location: /users");
                 exit;
             } else {
-                $user = $this->usertModel->getUserById($id);
+                $user = $this->userModel->getUserById($id);
                 renderView("view/user/edit.php", compact('errors',  'name', 'email', 'password'), "Edit user");
             }
         } else {
-            $user = $this->usertModel->getUserById($id);
+            $user = $this->userModel->getUserById($id);
             renderView("view/user/edit.php", compact('user'), "Edit user");
         }
     }
 
     public function delete($id) {
-        $this->usertModel->deleteUser($id);
+        $this->userModel->deleteUser($id);
         $_SESSION['success_message'] = "user deleted successfully!";
         header("Location: /users");
         exit;
