@@ -31,8 +31,9 @@ $addressController = new AddressController();
 
 $router->addMiddleware('logRequest');
 
+$router->addRoute("/products", [$productController, "index"], ['isUser']); 
+$router->addRoute("/productshow", [$productController, "show"], ['isUser']); // Accessible to all logged-in users
 
-$router->addRoute("/products", [$productController, "index"], ['isUser']); // Accessible to all logged-in users
 $router->addRoute("/products/create", [$productController, "create"], ['isAdmin']); // Admin only
 $router->addRoute("/products/{id}", [$productController, "show"], ['isUser']); // Accessible to all logged-in users
 $router->addRoute("/products/edit/{id}", [$productController, "edit"], ['isAdmin']); // Admin only
@@ -85,6 +86,7 @@ $router->addRoute("/coupons/edit/{id}", [$couponController, "edit"], ['isAdmin']
 $router->addRoute("/coupons/delete/{id}", [$couponController, "delete"], ['isAdmin']);
 // carts
 $router->addRoute("/carts", [$cartController, "index"], ['isUser']);
+$router->addRoute("/love", [$cartController, "indexx"], ['isUser']);
 $router->addRoute("/carts/delete/{id_Cart}", [$cartController, "delete"], ['isUser'], 'POST');
 $router->addRoute('/carts/create', [$cartController, "create"] , ['isUser']);
 $router->addRoute('/carts/update/{id_Cart}', [$cartController, "updateQuantity"], ['isUser']);
@@ -95,6 +97,7 @@ $router->addRoute('/checkout', [$cartController, "checkout"]);
 //order
 $router->addRoute("/order", [$orderController, "listAllOrder"], ['isAdmin']);
 $router->addRoute("/orders", [$orderController, "listOrderById"], ['isUser']);
+$router->addRoute("/orderslist", [$orderController, "listOrderById"], ['isUser']);
 //Address
 
 $router->addRoute("/addresses", [$addressController, "index"]);

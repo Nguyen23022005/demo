@@ -9,6 +9,14 @@ function isAdmin() {
     header("Location: /login");
     exit;
 }
+function x(){
+    if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'quan'){
+        return true;
+    }
+    echo "Access denied: Quanly privileges required.";
+    header("Location: /login"); 
+    exit;
+}
 
 function isUser() {
     if (isset($_SESSION['user'])) {

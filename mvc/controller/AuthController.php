@@ -30,6 +30,7 @@ class AuthController {
             } elseif (strlen($password) < 6) {
                 $errors['password'] = "Password must be at least 6 characters long.";
             }
+            
 
             if (empty($errors)) {
                 if ($this->userModel->register($name, $email, $password)) {

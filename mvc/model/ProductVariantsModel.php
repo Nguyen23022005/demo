@@ -11,7 +11,7 @@ class ProductVariantModel {
     }
 
     public function getAll() {
-        $query = "SELECT * FROM products_variantss WHERE product_id = :product_id";
+        $query = "SELECT * FROM products_variantss WHERE productvarian_id = :productvarian_id";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -36,17 +36,17 @@ class ProductVariantModel {
         $query = "SELECT *, c.name as colorName, s.name as sizeName
          FROM product_variantss p INNER JOIN colors c on p.colorId = c.id
             INNER JOIN sizes s on p.sizeId = s.id
-         WHERE p.product_id = :productId ";
+         WHERE p.productvarian_id = :productId ";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':productId', $productId);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function createVariants($product_id, $colorId, $sizeId, $image, $quantity, $price, $sku) {
-        $query = "INSERT INTO product_variantss (product_id, colorId, sizeId,image, quantity,price,sku) VALUES (:product_id, :colorId, :sizeId, :image, :quantity, :price, :sku)";
+    public function createVariants($productvarian_id, $colorId, $sizeId, $image, $quantity, $price, $sku) {
+        $query = "INSERT INTO product_variantss (productvarian_id, colorId, sizeId,image, quantity,price,sku) VALUES (:productvarian_id, :colorId, :sizeId, :image, :quantity, :price, :sku)";
         $stmt = $this->conn->prepare($query);   
-        $stmt->bindParam(':product_id', $product_id);
+        $stmt->bindParam(':productvarian_id', $productvarian_id);
         $stmt->bindParam(':colorId', $colorId);
         $stmt->bindParam(':sizeId', $sizeId);
         $stmt->bindParam(':image', $image);

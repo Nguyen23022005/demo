@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Danh sách lịch sử  đơn hàng</title>
+    <title>Danh sách đơn hàng</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,20 +42,11 @@
 </head>
 
 <body>
-    <h2><?php echo htmlspecialchars($message); ?></h2>
+    <h1>chi tiết đơn hàng</h1>
 
     <?php if (!empty($orders)) : ?>
         <table>
-            <thead>
-                <tr>
-                    <th>Mã đơn hàng</th>
-                    <th>Ngày đặt</th>
-                    <th>Tổng tiền</th>
-                    <th>Trạng thái</th>
-                    <th>Chi tiết</th>
-                
-                </tr>
-            </thead>
+          
             <tbody>
                 <?php foreach ($orders as $order) : ?>
                     <tr>
@@ -63,7 +54,7 @@
                         <td><?php echo htmlspecialchars($order['createDate']); ?></td>
                         <td><?php echo number_format($order['total'], 0, ',', '.'); ?> VND</td>
                         <td><?php echo htmlspecialchars($order['status']); ?></td>
-                        <td><a href="/orderslist">chi tiết</a></td>
+                     
                        
                     </tr>
                 <?php endforeach; ?>

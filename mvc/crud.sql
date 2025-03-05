@@ -1,0 +1,7 @@
+CREATE TABLE cruds (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    storeName VARCHAR(255) NOT NULL,
+    storeAddress VARCHAR(255) NOT NULL,
+    storeHours VARCHAR(255) NOT NULL,
+    storePhone VARCHAR(20) NOT NULL
+);

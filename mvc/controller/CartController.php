@@ -40,6 +40,23 @@ class CartController
         //compact: gom bien dien thanh array
         renderView("view/cart/list.php", compact('carts'), "carts List");
     }
+    public function indexx()
+    {
+        $user_id = $_SESSION['user']['id'] ?? null;
+        $session_id = session_id();
+        $carts = $this->cartModel->getCart($user_id, $session_id);
+        //compact: gom bien dien thanh array
+        renderView("view/product_love.php", compact('carts'), "carts List");
+    }
+    public function show()
+    {
+        $user_id = $_SESSION['user']['id'] ?? null;
+        $session_id = session_id();
+        $carts = $this->cartModel->getCartt($user_id, $session_id
+        );  
+        renderView("view/cart/productlistlove.php", compact('carts'), "carts Show");
+        }
+    
 
     public function checkout()
     {

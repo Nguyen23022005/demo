@@ -28,6 +28,7 @@
                                 <?= $order['status'] ?>
                                 <!-- <span class="badge bg-success">Đã giao hàng</span> -->
                             </p>
+                            <p><strong>rewiew</strong>
                         </div>
                     </div>
                     <h5 class="mb-3">Sản phẩm</h5>

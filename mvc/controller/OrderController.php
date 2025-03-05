@@ -30,6 +30,19 @@ class OrderController
         // Render view
         renderView("view/cart/donhang.php", compact('orders', 'message'), "Danh sách đơn hàng");
     }
+    public function listOrderById1() {
+        
+        $user_id = $_SESSION['user']['id'] ?? null;
+        $session_id = session_id();
+        $orders = $this->orderModel->getOrderByUserId1($user_id, $session_id);
+        
+        // Sửa lỗi biến `$order` thành `$orders`
+        $message = empty($orders) ? "Bạn chưa có đơn hàng nào." : "Danh sách đơn hàng của bạn";
+    
+        // Render view
+        renderView("view/cart/lichsu.php", compact('orders', 'message'), "Danh sách đơn hàng");
+    }
+ 
  
 
    

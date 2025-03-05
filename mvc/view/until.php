@@ -12,11 +12,11 @@ require 'vendor/autoload.php';
 // require 'PHPMailer/src/PHPMailer.php';
 // require 'PHPMailer/src/SMTP.php';
 
-define('USERNAME_EMAIL', 'baotrinhvan54@gmail.com'); // thay bằng email của bạn
-define('PASSWORD_EMAIL', 'lrga beak nfui gkyr'); // thay bằng mật khẩu của bạn
+define('USERNAME_EMAIL', 'nguyenvitas7@gmail.com'); // thay bằng email của bạn
+define('PASSWORD_EMAIL', 'kbuz kbow ciyq wsnn'); // thay bằng mật khẩu của bạn
 class MailService
 {
-    public static function send($to = 'baotrinhvan54@gmail.com', $from = 'baotrinhvan54@gmail.com', $sublect = 'notfication', $content = '')
+    public static function send($to = 'nguyenvitas7@gmail.com', $from = 'nguyenvitas7@gmail.com', $sublect = 'notfication', $content = '')
     {
         try {
             $mail = new PHPMailer();

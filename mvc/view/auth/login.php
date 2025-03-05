@@ -79,14 +79,23 @@ if (isset($_GET['code'])) {
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <div class="container">
         <form method="POST" class="w-50 mx-auto border p-4 rounded shadow">
+           
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
-            </div>
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" class="form-control <?= !empty($errors['email']) ? 'is-invalid' : '' ?>" 
+                   value="<?= htmlspecialchars($email ?? '') ?>" placeholder="Enter your email" >
+            <?php if (!empty($errors['email'])): ?>
+                <div class="invalid-feedback"><?= htmlspecialchars($errors['email']) ?></div>
+            <?php endif; ?>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" id="password" class="form-control <?= !empty($errors['password']) ? 'is-invalid' : '' ?>" 
+                   placeholder="Enter your password" >
+            <?php if (!empty($errors['password'])): ?>
+                <div class="invalid-feedback"><?= htmlspecialchars($errors['password']) ?></div>
+            <?php endif; ?>
+        </div>
             <div class="container">
         <div class="table-responsive">
             <h3 align="center">Đăng nhập google đi em</h3>

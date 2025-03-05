@@ -17,7 +17,7 @@
         .sidebar {
             min-width: 250px;
             max-width: 250px;
-            background-color: rgb(157, 28, 114);
+            background-color:rgb(157, 28, 114);
             color: white;
             display: flex;
             flex-direction: column;
@@ -32,7 +32,7 @@
         }
 
         .sidebar a:hover {
-            background-color: rgb(24, 100, 176);
+            background-color:rgb(24, 100, 176);
         }
 
         .content {
@@ -107,10 +107,6 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark fw-semibold" href="/addresses">dress</a>
-
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark fw-semibold" href="/love">product love</a>
 
                                 </li>
                                 <li class="nav-item">

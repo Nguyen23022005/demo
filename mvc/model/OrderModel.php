@@ -24,6 +24,13 @@ class OrderModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getOrderByUserId1($user_id) {
+        $query = "SELECT * FROM orders WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     // create createOrderDetail
     public function createOrderDetail($order_id, $sku, $quantity, $price) {
         $query = "INSERT INTO order_detail (order_id, sku, quantity, price) VALUES (:order_id, :sku, :quantity, :price)";

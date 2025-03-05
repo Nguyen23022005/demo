@@ -65,7 +65,9 @@ if (!empty($product_variants)) {
             <label for="quantityInput" class="mt-3"><strong>Quantity:</strong></label>
             <input type="number" id="quantityInput" name="quantity" class="form-control" min="1" value="1" required disabled>
             
-            <button type="submit" id="addToCartBtn" class="btn btn-primary mt-3" disabled>Add to Cart</button>
+            <!-- <button type="submit" id="addToCartBtn" class="btn btn-primary mt-3" disabled>Add to Cart</button> -->
+            <button type="submit" id="addToCartBtn" class="btn btn-primary mt-3" disabled>thêm vào trang yêu thích</button>
+            <button type="submit" id="addToCartBtn" class="btn btn-primary mt-3" disabled>thêm vào giỏ hàng</button>
         </form>
     </div>
 </div>
